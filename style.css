@@ -1,0 +1,83 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+h1 {
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+section {
+    background-color: rgb(10, 10, 10);
+    width: 400px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1rem;
+}
+#display {
+    display: flex;
+    width: 350px;
+    height: 150px;
+    flex-direction: column;
+    background-color: rgb(22, 22, 22);
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+#res {
+    height: 50px;
+    width: 350px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    font-size: 50px;
+    align-items: flex-end;
+}
+#parse {
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 35px;
+    color: rgb(150, 150, 150);
+}
+#teclado {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 350px;
+}
+td {
+    max-width: 85px;
+}
+button {
+    border: none;
+    width: 85px;
+    height: 85px;
+    font-size: x-large;
+    background-color: rgb(22, 22, 22);
+    color: white;
+    transition: .2s;
+}
+button:hover {
+    background-color: rgb(8, 8, 8);
+}
+.operadores {
+    color: orangered;
+}
+#igual {
+    width: 172px;
+    font-size: 35px;
+}
