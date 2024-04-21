@@ -1,15 +1,6 @@
-const deg = document.querySelector('#deg');
-const sin = document.querySelector('#sin');
-const cos = document.querySelector('#cos');
-const tan = document.querySelector('#tan');
-const [isInvert, setIsInvert] = false;
-revertFunctions() {
-    if (isInvert) {
-
-    } else {
-        
-    }
-}
+const btns = document.querySelectorAll('button');
+const result = document.querySelector('.result');
+const partial = document.querySelector('.partial');
 
 //forEach nos botões para adicionar um evento de click que chama a função de mesmo nome
 btns.forEach((button, value) => {
@@ -19,32 +10,25 @@ btns.forEach((button, value) => {
 });
 
 //função acionada ao clicar em um botão
-function click(value) {
-    btns.forEach((button, index) => {
-        if(index === value) {
-            if (index === 0) {
-                clear();
-            } else if (index === 1) {
-                eraser();
-            } else if (index === 18) {
-                calculate();
-            } else {
-                show(button.value);
-            }  
+function click( data ) {
+    btns.forEach((button, value) => {
+        if(data === value) {
+            if (value === 'dell') clear();
+            else if (value === 'close') 
         }
     });
 }
 
 //função para mostrar valor digitado na tela
 function show(value) {
-    resul.innerHTML += value;
+    result.innerHTML += value;
     upDisplayParse();
 }
 
 //função acionada ao clicar no botão "C" que limpa o display
 function clear() {
-    resul.innerHTML = '';
-    parse.innerHTML = '';
+    result.innerHTML = '';
+    partial.innerHTML = '';
 }
 
 //função que apaga ultimo valor digitado
