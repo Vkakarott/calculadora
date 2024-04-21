@@ -1,83 +1,88 @@
+:root {
+    --black-ground: #050505;
+    --black-light: #222222;
+    --black-body: #131313;
+    --color-itens: white;
+    --button-color: rgb(255, 98, 0);
+    --button-light-color: rgba(128, 128, 128, 0.644);
+}
+
 * {
     padding: 0;
     margin: 0;
 }
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
-    background-color: black;
+    background-color: var(--black-ground);
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center; 
+    color: var(--color-itens);
 }
-h1 {
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-section {
-    background-color: rgb(10, 10, 10);
-    width: 400px;
-    border-radius: 20px;
+
+main {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
     align-items: center;
-    padding: 1.5rem;
-    gap: 1rem;
+    justify-content: center;
 }
-#display {
+
+.body{
+    background-color: var(--black-body);
     display: flex;
-    width: 350px;
-    height: 150px;
     flex-direction: column;
-    background-color: rgb(22, 22, 22);
-    color: rgb(255, 255, 255);
+    align-items: center;
+    justify-content: center;
+    min-width: 370px;
+    border-radius: 20px;
+    padding: 30px 40px;
+    gap: 10px;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 130px;
+    background-color: var(--black-light);
     font-size: 40px;
     align-items: flex-end;
     justify-content: flex-end;
 }
-#res {
-    height: 50px;
-    width: 350px;
-    padding: 2px;
+
+.keyboard {
     display: flex;
     flex-direction: column;
-    font-size: 50px;
-    align-items: flex-end;
+    width: 100%;
+    height: 100%;
 }
-#parse {
-    padding: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    font-size: 35px;
-    color: rgb(150, 150, 150);
-}
-#teclado {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: 350px;
-}
-td {
-    max-width: 85px;
-}
+
 button {
     border: none;
-    width: 85px;
-    height: 85px;
-    font-size: x-large;
-    background-color: rgb(22, 22, 22);
-    color: white;
-    transition: .2s;
+    width: 75px;
+    height: 65px;
+    font-size: 1.1em;
+    background-color: var(--black-light);
+    color: var(--color-itens);
+    transition: .5s;
 }
+
 button:hover {
-    background-color: rgb(8, 8, 8);
+    background-color: var(--black-ground);
 }
-.operadores {
-    color: orangered;
+
+.operating {
+    color: var(--button-color);
 }
-#igual {
-    width: 172px;
-    font-size: 35px;
+
+.plus-operator {
+    color: var(--button-light-color);
 }

@@ -1,6 +1,15 @@
-const btns = document.querySelectorAll('button');
-const resul = document.getElementById('res');
-const parse = document.getElementById('parse');
+const deg = document.querySelector('#deg');
+const sin = document.querySelector('#sin');
+const cos = document.querySelector('#cos');
+const tan = document.querySelector('#tan');
+const [isInvert, setIsInvert] = false;
+revertFunctions() {
+    if (isInvert) {
+
+    } else {
+        
+    }
+}
 
 //forEach nos botões para adicionar um evento de click que chama a função de mesmo nome
 btns.forEach((button, value) => {
