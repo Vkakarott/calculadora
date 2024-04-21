@@ -1,5 +1,8 @@
-# cauculadora
-Projeto javascript em conjunto com html e css
-Calculadora simples
+# calculadora
+Projeto basico de calculadora com vanilla
+
 Desenvolvida com intuito de testar e treinar habilidades e logica de programação
-Uso de forEach(), addEventListener(), if(), eval(), entre outros...
+<p>Html, Css e Javascript</p>
+
+- [X] Calculadora simples
+- [ ] Calculadora cientifica
