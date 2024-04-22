@@ -41,7 +41,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 370px;
+    max-width: 383px;
     border-radius: 20px;
     padding: 30px 40px;
     gap: 10px;
@@ -60,9 +60,11 @@ main {
 
 .keyboard {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
     height: 100%;
+    gap: 2px;
 }
 
 button {
@@ -86,4 +88,20 @@ button:hover {
 
 .plus-operator {
     color: var(--button-light-color);
+}
+
+#exponencial {
+    color: var(--color-itens);
+}
+
+.cientific {
+    max-width: 306px;
+}
+
+.cientific > section > button {
+    height: 75px;
+}
+
+.cientific > section > .plus-operator {
+    display: none;
 }
