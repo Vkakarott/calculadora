@@ -42,7 +42,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 383px;
+    max-width: 383px;
     border-radius: 20px;
     padding: 30px 40px;
     gap: 10px;
