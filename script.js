@@ -9,13 +9,10 @@ function invertCalc() {
     body.classList.toggle('cientific');
 }
 
-result.innerHTML = '0';
 let expression = '';
 let numTemp = '';
 let isOperator = false;
-
-let lastTerm = 0;
-let fistTerm = '';
+let calcPartial = '';
 
 buttons.forEach((button, value) => {
     button.addEventListener('click', () => {
@@ -24,50 +21,44 @@ buttons.forEach((button, value) => {
 });
 
 function click( data ) {
-    buttons.forEach((button, value) => {
-        if(data === value) {
-            if (isNaN(buttons[value].value)) {
-                switch (buttons[value].value) {
-                    case '.':
-                        show(',');
-                        break;
-                    case 'dell':
-                        clear();
-                        break;
-                    case 'close':
-                        eraser();
-                        break;
-                    case 'equal':
-                        calculate();
-                        break;
-                    case 'invert':
-                        invertCalc();
-                        break;
-                    case 'porcent':
-                        porcent(lastTerm, fistTerm);
-                        break;
-                    case '+':
-                    case '-':
-                    case '/':
-                    case '*':
-                        show(buttons[value].value);
-                        break;
-                }
-            } else {
-                show(buttons[value].value);
-            }
-        }
-    });
+    const button = buttons[data];
+
+    if (!button) return;
+
+    const buttonValue = button.value;
+
+    switch (buttonValue) {        
+        case 'dell':
+            clear();
+            break;
+        case 'close':
+            eraser();
+            break;
+        case 'equal':
+            calculate();
+            break;
+        case 'invert':
+            invertCalc();
+            break;
+        case 'porcent':
+            break;
+        default:
+            show(buttonValue);
+    }
+    upDisplayParse();
 }
 
 function show(value) {
-    if (isOperator && !isNaN(value)) {
+    if (result.innerHTML.length > 9) return;
+    else if (isOperator && !isNaN(value)) {
         result.innerHTML += value;
         numTemp += value;
         isOperator = false;
+        calcPartial = expression + numTemp;
     } else {
         if (value === ',') {
-            numTemp += '.';
+            if (result.innerHTML === '0') numTemp = '0.';
+            else numTemp += '.';
             result.innerHTML += value;
         } else if (['+', '-', '*', '/'].includes(value)) {
             let symbol;
@@ -80,9 +71,11 @@ function show(value) {
             if (result.innerHTML === '0'){
                 result.innerHTML = value;
                 numTemp = value;
+                calcPartial = expression + numTemp;
             } else {
                 result.innerHTML += value;
                 numTemp += value;
+                calcPartial = expression + numTemp;
             }
         }
     }
@@ -99,19 +92,22 @@ function porcent () {
 
 function clear() {
     expression = '';
+    calcPartial = '';
     result.innerHTML = '0';
     partial.innerHTML = '';
 }
 
 function eraser() {
     result.innerHTML = result.innerHTML.slice(0, -1);
+    expression.slice(0, -1);
     if (result.innerHTML.length < 2) {
         clear();
     }
 }
 
 function upDisplayParse() {
-    
+    console.log(calcPartial);
+    partial.innerHTML = eval(calcPartial) ?? '';
 }
 
 function calculate() {
@@ -119,5 +115,7 @@ function calculate() {
     numTemp = '';
     let calculate = eval(expression);
     result.innerHTML = calculate;
+    partial.innerHTML = '';
+    calcPartial = '';
     expression = calculate;
 }
