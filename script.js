@@ -87,7 +87,9 @@ function operator(op) {
 }
 
 function porcent () {
-    
+    let por = numTemp/ 100;
+    if (expression === '') numTemp = por;
+    else numTemp = calcPartial * por;
 }
 
 function clear() {
