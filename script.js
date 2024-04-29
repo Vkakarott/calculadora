@@ -1,9 +1,9 @@
-const generate  = document.querySelector('html');
+const $html = document.querySelector('html');
 const buttons = document.querySelectorAll('button');
 const result = document.querySelector('.result');
 const partial = document.querySelector('.partial');
 const body = document.querySelector('.body');
-const trigger = document.querySelectorAll('.sec');
+const trigonometric = document.querySelectorAll('.sec');
 const deg = document.querySelector('#deg');
 
 buttons.forEach((button, value) => {
@@ -41,6 +41,15 @@ function click(data) {
         case 'second':
             invertFunction();
             break;
+        case 'deg':
+            isDegOrRad();
+            break;
+        case 'sen':
+            sin();
+            break;
+        case 'cos':
+        case 'tan':
+            break;
         default:
             show(buttonValue);
     }
@@ -52,7 +61,7 @@ function invertCalc() {
 }
 
 function themerMode() {
-    generate.classList.toggle('light');
+    $html.classList.toggle('light');
 }
 
 let isOperator = false;
@@ -61,7 +70,8 @@ let numTemp = '';
 let calcPartial = '';
 let residue = 0;
 let hasComma = false;
-let invertTrigger = false;
+let invertTrigonometric = false;
+let isDeg = true;
 
 function show(value) {
     if (result.innerHTML.length > 9) return;
@@ -80,6 +90,18 @@ function show(value) {
         return;
     } 
 
+    if (value === '('){
+        if (result.innerHTML === '0') result.innerHTML = value;
+        else result.innerHTML += value;
+
+        numTemp += value;
+        calcPartial = expression;
+        isOperator = true;
+        hasComma = true;
+
+        return;
+    }
+
     if (isOperator) return;
     
     if (value === ',') {
@@ -94,6 +116,7 @@ function show(value) {
     let symbol;
 
     if (value === '*') symbol = 'x';
+    else if (value === '**') symbol = '^';
     else symbol = value;
 
     result.innerHTML += symbol;
@@ -171,12 +194,20 @@ function calculate() {
 }
 
 function invertFunction() {
-    invertTrigger = !invertTrigger;
+    invertTrigonometric = !invertTrigonometric;
 
-    if (invertTrigger) deg.style.color = ''
+    if (invertTrigonometric) deg.setAttribute('disabled', true);
+    else deg.disabled = false;
 
-    trigger.forEach((item) => {
-        if (invertTrigger) item.style.display = 'inline-flex';
+    trigonometric.forEach((item) => {
+        if (invertTrigonometric) item.style.display = 'inline-flex';
         else item.style.display = 'none';
     })
+}
+
+function isDegOrRad() {
+    isDeg = !isDeg;
+
+    if (isDeg) deg.innerHTML = 'deg';
+    else deg.innerHTML = 'rad';
 }
