@@ -1,9 +1,21 @@
 :root {
-    --black-ground: #050505;
-    --black-light: #222222;
-    --black-body: #131313;
+    --color-ground: #202020;
+    --color-body: #111111;
     --color-itens: white;
-    --button-color: rgb(255, 98, 0);
+    --color-hovers: #101010;
+    --color-shadow: rgba(163, 163, 163, 0.051);
+    --button-color: #ff9f1c;
+    --button-light-color: rgba(128, 128, 128, 0.644);
+}
+
+.light:root {
+    --color-ground: #f0f0f0;
+    --color-body: #e0e0e0;
+    --color-itens: black;
+    --color-hovers: #d0d0d0;
+    --color-shadow: rgba(244, 244, 244, 0.484);
+    --button-color: #7b3aff;
+    --button-color2: #ff9f1c;
     --button-light-color: rgba(128, 128, 128, 0.644);
 }
 
@@ -20,7 +32,7 @@ body, html {
 }
 
 body {
-    background-color: var(--black-ground);
+    background-color: var(--color-ground);
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
@@ -30,30 +42,35 @@ body {
 
 main {
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+    gap: 15px;
     align-items: center;
     justify-content: center;
 }
 
 .body{
-    background-color: var(--black-body);
+    background-color: var(--color-body);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 383px;
-    border-radius: 20px;
-    padding: 30px 40px;
+    max-width: 300px;
+    border-radius: 17px;
+    box-shadow: 5px 5px 10px var(--color-shadow);
+    padding: 10px 15px 30px 15px;
     gap: 10px;
 }
 
 .display {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 130px;
-    background-color: var(--black-light);
+    width: calc(100% - 25px);
+    height: 120px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    box-shadow: inset -5px -5px 10px var(--color-shadow);
     align-items: flex-end;
     justify-content: flex-end;
 }
@@ -61,8 +78,9 @@ main {
 .result {
     font-size: 3em;
 }
+
 .partial {
-    font-size: 2em;
+    font-size: 1.7em;
     color: var(--button-light-color);
 }
 
@@ -70,23 +88,27 @@ main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
-    gap: 2px;
+    gap: 5px;
 }
 
 button {
     border: none;
-    width: 75px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
     font-size: 1.1em;
-    background-color: var(--black-light);
+    box-shadow:  5px 5px 10px var(--color-shadow);
+    background-color: var(--color-light);
     color: var(--color-itens);
     transition: .5s;
 }
 
 button:hover {
-    background-color: var(--black-ground);
+    background-color: var(--color-hovers);
 }
 
 .operating {
@@ -102,15 +124,90 @@ button:hover {
     color: var(--color-itens);
 }
 
-.cientific {
-    min-width: 306px;
-    max-width: 306px;
-}
-
-.cientific > section > button {
-    height: 75px;
-}
-
-.cientific > section > .plus-operator {
+.plus-operator {
     display: none;
+}
+
+.cientific {
+    max-width: 355px;
+}
+
+.cientific > .keyboard > button {
+    width: 65px;
+    height: 65px;
+}
+
+.cientific > .keyboard > .plus-operator {
+    display: block;
+}
+
+.details {
+    display: flex;
+    width: 95%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+}
+
+.details > span {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;  
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+#equall {
+    background-color: var(--button-color);
+    color: var(--color-itens);
+}
+
+.dark-mode {
+    height: 40px;
+    border-radius: 5px;
+    color: var(--button-light-color);
+}
+
+.bs {
+    display: flex;
+    transform: translate(26px, 11px);
+}
+.el {
+    display: flex;
+    font-size: 0.7em;
+    transform: translate(37px, -14px);
+}
+
+.one {
+    display: flex;
+    font-size: 0.8em;
+    transform: translate(20px, 15px);
+}
+
+.barra {
+    display: flex;
+    font-size: 1.7em;
+    transform: translate(25px, 10px) rotate(20deg);
+}
+
+.x {
+    display: flex;
+    font-size: 0.8em;
+    transform: translate(35px, -19px);
+}
+
+.sec {
+    display: none;
+    font-size: 0.7em;
+    transform: translate(0px, -7px);
 }

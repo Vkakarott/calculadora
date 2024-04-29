@@ -10,17 +10,22 @@
 <body>
     <main>
         <section class="body">
+            <div class="details">
+                <span class="red"></span>
+                <span class="yellow"></span>
+                <span class="green"></span>
+            </div>
             <section class="display">
                 <div class="partial"></div>
                 <div class="result">0</div>
             </section>
             <section class="keyboard">
                 <button value="second" class="plus-operator">2nd</button>
-                <button value="deg" class="plus-operator">deg</button>
-                <button value="sin" class="plus-operator">sin</button>
-                <button value="cos" class="plus-operator">cos</button>
-                <button value="tan" class="plus-operator">tan</button>
-                <button value="expoente" class="plus-operator">X <span class="el">y</span></button>
+                <button value="deg" id="deg" class="plus-operator">deg</button>
+                <button value="sin" class="plus-operator">sin<span class="sec">-1</span></button>
+                <button value="cos" class="plus-operator">cos<span class="sec">-1</span></button>
+                <button value="tan" class="plus-operator">tan<span class="sec">-1</span></button>
+                <button value="expoente" class="plus-operator"><span class="bs">X</span><span class="el">y</span></button>
                 <button value="log" class="plus-operator">lg</button>
                 <button value="ln" class="plus-operator">ln</button>
                 <button value="(" class="plus-operator">&#40</button>
@@ -35,7 +40,11 @@
                 <button value="8" class="num">8</button>
                 <button value="9" class="num">9</button>
                 <button value="*" class="operating">&#215</button>
-                <button class="plus-operator"><span class="one">1</span><span class="barra">/</span><span class="x">x</span></button>
+                <button class="plus-operator">
+                    <span class="one">1</span>
+                    <span class="barra">/</span>
+                    <span class="x">x</span>
+                </button>
                 <button value="4" class="num">4</button>
                 <button value="5" class="num">5</button>
                 <button value="6" class="num">6</button>
@@ -49,8 +58,11 @@
                 <button value="exponencial" id="exponencial" class="plus-operator">e</button>
                 <button value="0" class="num">0</button>
                 <button value="," class="num">,</button>
-                <button value="equal" class="operating">=</button>
+                <button id="equall" value="equal" class="operating">=</button>
             </section>
+        </section>
+        <section class="dark-light">
+            <button value="mode" class="dark-mode">Mode</button>
         </section>
     </main>
             
