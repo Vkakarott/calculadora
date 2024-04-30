@@ -10,13 +10,12 @@
 
 .light:root {
     --color-ground: #f0f0f0;
-    --color-body: #e0e0e0;
+    --color-body: #ffffff;
     --color-itens: black;
     --color-hovers: #d0d0d0;
-    --color-shadow: rgba(244, 244, 244, 0.484);
+    --color-shadow: rgba(228, 228, 228, 0.550);
     --button-color: #7b3aff;
-    --button-color2: #ff9f1c;
-    --button-light-color: rgba(128, 128, 128, 0.644);
+    --button-light-color: rgba(163, 163, 163, 0.575);
 }
 
 * {
@@ -50,7 +49,7 @@ main {
     justify-content: center;
 }
 
-.body{
+.body {
     background-color: var(--color-body);
     display: flex;
     flex-direction: column;
@@ -147,24 +146,6 @@ button:hover {
     align-items: center;
     justify-content: flex-start;
     gap: 7px;
-}
-
-.details > span {
-    height: 14px;
-    width: 14px;
-    border-radius: 50%;  
-}
-
-.red {
-    background-color: red;
-}
-
-.yellow {
-    background-color: yellow;
-}
-
-.green {
-    background-color: green;
 }
 
 #equall {

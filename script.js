@@ -5,6 +5,7 @@ const partial = document.querySelector('.partial');
 const body = document.querySelector('.body');
 const trigonometric = document.querySelectorAll('.sec');
 const deg = document.querySelector('#deg');
+const secund = document.querySelector('#second');
 
 buttons.forEach((button, value) => {
     button.addEventListener('click', () => {
@@ -207,6 +208,9 @@ function invertFunction() {
 
 function isDegOrRad() {
     isDeg = !isDeg;
+
+    if (isDeg) secund.disabled = false;
+    else secund.disable = true;
 
     if (isDeg) deg.innerHTML = 'deg';
     else deg.innerHTML = 'rad';
