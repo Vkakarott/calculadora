@@ -7,11 +7,14 @@ const trigonometric = document.querySelectorAll('.sec');
 const deg = document.querySelector('#deg');
 const secund = document.querySelector('#second');
 
+
 buttons.forEach((button, value) => {
     button.addEventListener('click', () => {
         click(value);
     });
 });
+
+$html.classList.add('light');
 
 function click(data) {
     const button = buttons[data];
@@ -67,12 +70,14 @@ function themerMode() {
 
 function formatShow(value) {
     value = String(value);
+    value = value.replace(/\s/g, '');   
     value = value.replace(/\./g,',');
     return value;
 }
 
 function formatCalc(value) {
     value = String(value);
+    value = value.replace(/\s/g, '');   
     value = value.replace(/\,/g,'.');
     return value;
 }
@@ -81,6 +86,7 @@ let isOperator = false;
 let expression = '';
 let numTemp = '';
 let calcPartial = '';
+let isParent = false
 let residue = 0;
 let hasComma = false;
 let invertTrigonometric = false;
@@ -108,8 +114,25 @@ function show(value) {
     } 
 
     if (value === '('){
-        if (result.innerHTML === '0') result.innerHTML = value;
-        else result.innerHTML += value;
+        if (result.innerHTML === '0') {
+            result.innerHTML = value;
+            preCalc('', true, true);
+            return;
+        } else { 
+            if (isOperator){
+                result.innerHTML += value;
+                hasParent = true;
+                ...
+            } 
+            return;
+        } 
+
+        if(expression === '') preCalc('', true, true);
+        else {
+            hasParent = true;
+            expression += numTemp;
+            before = expression + numTemp;
+        }
 
         preCalc(value, true, true);
 
