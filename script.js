@@ -45,7 +45,7 @@ function click(data) {
         case 'deg':
             isDegOrRad();
             break;
-        case 'sen':
+        case 'sin':
             sin();
             break;
         case 'cos':
@@ -65,6 +65,18 @@ function themerMode() {
     $html.classList.toggle('light');
 }
 
+function formatShow(value) {
+    value = String(value);
+    value = value.replace(/\./g,',');
+    return value;
+}
+
+function formatCalc(value) {
+    value = String(value);
+    value = value.replace(/\,/g,'.');
+    return value;
+}
+
 let isOperator = false;
 let expression = '';
 let numTemp = '';
@@ -74,19 +86,23 @@ let hasComma = false;
 let invertTrigonometric = false;
 let isDeg = true;
 
+function preCalc(value, comma, operator) {
+    value = formatCalc(value);
+    numTemp += value;
+    calcPartial = expression + numTemp;
+    isOperator = operator;
+    hasComma = comma;
+}
+
 function show(value) {
     if (result.innerHTML.length > 9) return;
 
     if (!isNaN(value)) {
-        value = String(value);
-        value = value.replace(/\./g, ',');
+        value = formatCalc(value);
         if (result.innerHTML === '0') result.innerHTML = value;
         else result.innerHTML += value;
 
-        numTemp += value;
-        calcPartial = expression + numTemp;
-        isOperator = false;
-        hasComma = false;
+        preCalc(value, false, false);
 
         return;
     } 
@@ -95,10 +111,7 @@ function show(value) {
         if (result.innerHTML === '0') result.innerHTML = value;
         else result.innerHTML += value;
 
-        numTemp += value;
-        calcPartial = expression;
-        isOperator = true;
-        hasComma = true;
+        preCalc(value, true, true);
 
         return;
     }
@@ -107,10 +120,10 @@ function show(value) {
     
     if (value === ',') {
         if (hasComma) return;
-        if (result.innerHTML === '0') numTemp = '0.';
-        else numTemp += '.';
         result.innerHTML += value;
-        hasComma = true;
+        
+        preCalc(value, true, true);
+
         return;
     }
 
@@ -118,17 +131,19 @@ function show(value) {
 
     if (value === '*') symbol = 'x';
     else if (value === '**') symbol = '^';
+    else if (value === '/') symbol = '÷';
     else symbol = value;
 
     result.innerHTML += symbol;
     operator(value);
-    isOperator = true;
 }
 
 function operator(op) {
+    if (numTemp === '') numTemp = '0';
     residue = eval(numTemp);
     expression += numTemp + op;
     numTemp = '';
+    isOperator = true;
 }
 
 function clear() {
@@ -166,6 +181,7 @@ function eraser() {
 }
 
 function porcent () {
+    if (result.innerHTML === '0') return;
     let porcent;
     if (expression === '') {
         porcent = eval(numTemp) / 100;
@@ -180,7 +196,7 @@ function porcent () {
 }
 
 function upDisplayParse() {
-    calcPartial = calcPartial.replace(/\,/g, '.');
+    calcPartial = formatCalc(calcPartial);
     partial.innerHTML = eval(calcPartial) ?? '';
 }
 
@@ -188,6 +204,7 @@ function calculate() {
     expression += numTemp;
     numTemp = '';
     let calculate = eval(expression);
+    calculate = formatShow(calculate);
     result.innerHTML = calculate;
     partial.innerHTML = '';
     calcPartial = '';
@@ -214,4 +231,9 @@ function isDegOrRad() {
 
     if (isDeg) deg.innerHTML = 'deg';
     else deg.innerHTML = 'rad';
+}
+
+function sin(){
+    if (result.innerHTML === '0') result.innerHTML = 'sin(';
+    else result.innerHTML += 'sin(';
 }
