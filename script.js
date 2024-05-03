@@ -54,10 +54,14 @@ function click(data) {
         case 'cos':
         case 'tan':
             break;
+        case 'fatorial':
+            showFatorial();
+            break;
         default:
             show(buttonValue);
     }
     upDisplayParse();
+    console.log(calcPartial);
 }
 
 function invertCalc() {
@@ -91,11 +95,14 @@ let residue = 0;
 let hasComma = false;
 let invertTrigonometric = false;
 let isDeg = true;
+let hasParent = false;
+let before = '';
+let after = '';
 
 function preCalc(value, comma, operator) {
     value = formatCalc(value);
     numTemp += value;
-    calcPartial = expression + numTemp;
+    calcPartial = before + '(' + expression + numTemp + ')' + after;
     isOperator = operator;
     hasComma = comma;
 }
@@ -122,20 +129,17 @@ function show(value) {
             if (isOperator){
                 result.innerHTML += value;
                 hasParent = true;
-                ...
+                before = expression;
+                expression = '';
             } 
             return;
-        } 
-
-        if(expression === '') preCalc('', true, true);
-        else {
-            hasParent = true;
-            expression += numTemp;
-            before = expression + numTemp;
         }
+    }
 
-        preCalc(value, true, true);
-
+    if (value === ')') {
+        if (result.innerHTML === '' || isOperator) return;
+        result.innerHTML += ')';
+        expression = '(' + expression + ')';
         return;
     }
 
@@ -155,10 +159,12 @@ function show(value) {
     if (value === '*') symbol = 'x';
     else if (value === '**') symbol = '^';
     else if (value === '/') symbol = '÷';
+    else if (value === '**(-1)') symbol = '^(-1)';
     else symbol = value;
 
     result.innerHTML += symbol;
     operator(value);
+    preCalc('', true, true);
 }
 
 function operator(op) {
@@ -173,6 +179,8 @@ function clear() {
     expression = '';
     calcPartial = '';
     numTemp = '';
+    after = '';
+    before = '';
     hasComma = false;
     isOperator = false;
     result.innerHTML = '0';
@@ -226,11 +234,14 @@ function upDisplayParse() {
 function calculate() {
     expression += numTemp;
     numTemp = '';
+    expression = before + expression + after;
     let calculate = eval(expression);
     calculate = formatShow(calculate);
     result.innerHTML = calculate;
     partial.innerHTML = '';
     calcPartial = '';
+    after = '';
+    before = '';
     expression = calculate;
 }
 
@@ -259,4 +270,19 @@ function isDegOrRad() {
 function sin(){
     if (result.innerHTML === '0') result.innerHTML = 'sin(';
     else result.innerHTML += 'sin(';
+}
+
+function showFatorial() {
+    let value = Number(numTemp);
+    value = factor(value);
+    result.innerHTML = value;
+    partial.innerHTML = '';
+    calcPartial = '';
+    numTemp = '';
+    expression += value;
+}
+
+function factor(value) {
+    if (value === 0) return 1;
+    else return value * factor(value - 1);
 }
