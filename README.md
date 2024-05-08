@@ -5,4 +5,4 @@ Desenvolvida com intuito de testar e treinar habilidades e logica de programa√ß√
 <p>Html, Css e Javascript</p>
 
 - [X] Calculadora simples
-- [ ] Calculadora cientifica
+- [X] Calculadora cientifica
