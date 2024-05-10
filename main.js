@@ -7,13 +7,69 @@ const trigonometric = document.querySelectorAll('.sec');
 const deg = document.querySelector('#deg');
 const secund = document.querySelector('#second');
 
+function setCalculatorCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+function getCalculatorCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1, c.length);
+        }
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length, c.length);
+        }
+    }
+    return null;
+}
+
+function loadCalculatorStateFromCookie() {
+    var savedState = JSON.parse(getCalculatorCookie('calculatorState'));
+    if (savedState) {
+        if (savedState.theme === 'light') {
+            $html.classList.add('light');
+        } else {
+            $html.classList.remove('light');
+        }
+        if (savedState.scientificMode) {
+            body.classList.add('cientific');
+        } else {
+            body.classList.remove('cientific');
+        }
+    }
+}
+
+window.addEventListener('load', loadCalculatorStateFromCookie);
+
+$html.addEventListener('click', function() {
+    saveCalculatorState();
+});
+
+body.addEventListener('click', function() {
+    saveCalculatorState();
+});
+
+function saveCalculatorState() {
+    setCalculatorCookie('calculatorState', JSON.stringify({
+        theme: $html.classList.contains('light') ? 'light' : 'dark',
+        scientificMode: body.classList.contains('cientific')
+    }), 30);
+}
+
 buttons.forEach((button, value) => {
     button.addEventListener('click', () => {
         click(value);
     });
 });
-
-$html.classList.add('light');
 
 function click(data) {
     const button = buttons[data];
@@ -34,6 +90,7 @@ function click(data) {
             break;
         case 'close':
             eraser();
+            upDisplayParse();
             break;
         case 'equal':
             calculate();
@@ -46,6 +103,7 @@ function click(data) {
             break;
         case 'porcent':
             porcent();
+            upDisplayParse();
             break;
         case 'sin':
         case 'cos':
@@ -57,15 +115,20 @@ function click(data) {
             break;
         case 'fatorial':
             showFatorial();
+            upDisplayParse();
             break;
         case 'pi':
+            calculation(Math.PI.toFixed(5));
+            upDisplayParse();
             break;
         case 'e':
+            calculation(Math.E.toFixed(5));
+            upDisplayParse();
             break;
         default:
             calculation(buttonValue);
+            upDisplayParse();
     }
-    upDisplayParse();
 }
 
 function invertCalc() {
@@ -84,59 +147,71 @@ function isFunctionAwait(value) {
     awaitClosing = true;
     if (invertTrigonometric) functionAwait = 'arc' + value;
     else functionAwait = value;
+
+    if (functionAwait === 'sqrt') {
+        simpleShowValue('√');
+        return;
+    }
+
+    simpleShowValue(functionAwait + '(');
 }
 
 function sin(value) {
-    if (isDeg) numTemp = Math.sin(value * (Math.PI / 180));
-    else numTemp = Math.sin(value);
+    if (isDeg) numTemp = Math.sin(value * (Math.PI / 180)).toFixed(5);
+    else numTemp = Math.sin(value).toFixed(5);
 }
 
 function cos(value) {
-    if (isDeg) numTemp = Math.cos(value * (Math.PI / 180));
-    else numTemp = Math.cos(value);
+    if (isDeg) numTemp = Math.cos(value * (Math.PI / 180)).toFixed(5);
+    else numTemp = Math.cos(value).toFixed(5);
 }
 
 function tan(value) {
-    if (isDeg) numTemp = Math.tan(value * (Math.PI / 180));
-    else numTemp = Math.tan(value);
+    if (isDeg) numTemp = Math.tan(value * (Math.PI / 180)).toFixed(5);
+    else numTemp = Math.tan(value).toFixed(5);
 }
 
 function ln(value) {
-    numTemp = Math.log(value);
+    numTemp = Math.log(value).toFixed(5);
 }
 
 function log(value) {
-    numTemp = Math.log10(value);
+    numTemp = Math.log10(value).toFixed(5);
 }
 
 function sqrt(value) {
-    numTemp = Math.sqrt(value);
+    numTemp = Math.sqrt(value).toFixed(5);
 }
 
 function arcsin(value) {
-    if (isDeg) numTemp = Math.asin(value) * (180 / Math.PI);
-    else numTemp = Math.asin(value);
+    if (isDeg) numTemp = Math.asin(value) * (180 / Math.PI).toFixed(5);
+    else numTemp = Math.asin(value).toFixed(5);
 }
 
 function arccos(value) {
-    if (isDeg) numTemp = Math.acos(value) * (180 / Math.PI);
-    else numTemp = Math.acos(value);
+    if (isDeg) numTemp = Math.acos(value) * (180 / Math.PI).toFixed(5);
+    else numTemp = Math.acos(value).toFixed(5);
 }
 
 function arctan(value) {
-    if (isDeg) numTemp = Math.atan(value) * (180 / Math.PI);
-    else numTemp = Math.atan(value);
+    if (isDeg) numTemp = Math.atan(value) * (180 / Math.PI).toFixed(5);
+    else numTemp = Math.atan(value).toFixed(5);
 }
 
-function definiiveAnswer() {
+function resetFunctionAwait() {
     functionAwait = '';
     awaitClosing = false;
     amount = '';
+    result.innerHTML += ')';
+    return;
 }
 
 let amount = '';
 
 function synCalculator(value) {
+    if (value === ')') resetFunctionAwait();
+    if (isNaN(value)) return;
+    simpleShowValue(value);
     amount += value;
     amount = Number(amount);
     switch (functionAwait) {
@@ -170,7 +245,6 @@ function synCalculator(value) {
         default:
             break;
     }
-    if (value === ')') definiiveAnswer();
 }
 
 let numTemp = '';
@@ -179,10 +253,24 @@ let buffer = '';
 let isOperator = false;
 let hasComma = false;
 
+function simpleShowValue(value) {
+    if (result.innerHTML === '0') result.innerHTML = value;
+    else result.innerHTML += value;
+}
+
+function exceptionShow(value) {
+    if (value === '/') value = '÷';
+    if (value === '*') value = 'x';
+    if (value === '**') value = '^';
+    if (value === '**(-1)') value = '^(-1)';
+    result.innerHTML += value;
+}
+
 function valueNumber(value) {
     numTemp += buffer + value;
     buffer = '';
     isOperator = false;
+    simpleShowValue(value);
 }
 
 let hasParent = false;
@@ -193,6 +281,7 @@ function openParentesis() {
     expression += buffer;
     before = expression;
     expression = '';
+    simpleShowValue('(');
 }
 
 function closeParentesis() {
@@ -200,11 +289,15 @@ function closeParentesis() {
     hasComma = false;
     expression += numTemp;
     expression = before + '(' + expression + ')';
+    simpleShowValue(')');
 }
 
 function valueComa(value) {
     hasComma = true;
-    valueNumber(value);
+    numTemp += buffer + value;
+    buffer = '';
+    isOperator = false;
+    exceptionShow(',');
 }
 
 function operation(value) {
@@ -213,12 +306,27 @@ function operation(value) {
     numTemp = '';
     isOperator = true;
     hasComma = false;
+    if (value === '**(-1)') {
+        expression += buffer;
+        buffer = '';
+    }
+    exceptionShow(value);
+}
+
+function piAndE(value) {
+    numTemp += buffer + value;
+    buffer = '';
+    isOperator = false;
+    if (value === '3.14159') simpleShowValue('π');
+    else simpleShowValue('e');
 }
 
 function calculation(value) {
-    if (numTemp.length > 7 || expression.length > 15) return;
+    if (numTemp.length > 7 || expression.length > 21) return;
 
-    if (awaitClosing) synCalculator(value);
+    if (['3.14159', '2.71828'].includes(value)) piAndE(value);
+
+    else if (awaitClosing) synCalculator(value);
 
     else if (!isNaN(value)) valueNumber(value);
 
@@ -261,8 +369,13 @@ function clear() {
     numTemp = '';
     before = '';
     buffer = '';
+    amount = '';
+    functionAwait = '';
+    invertTrigonometric = false;
     hasParent = false;
     hasComma = false;
+    isDeg = true;
+    awaitClosing = false;
     isOperator = false;
     result.innerHTML = '0';
     partial.innerHTML = '';
@@ -299,8 +412,7 @@ function porcent () {
 
 function upDisplayParse() {
     calcPartial = before + expression + numTemp;
-    result.innerHTML = before + expression + buffer + numTemp;
-    partial.innerHTML = eval(calcPartial);
+    partial.innerHTML = eval(calcPartial) ?? '';
 }
 
 function calculate() {
@@ -309,7 +421,9 @@ function calculate() {
     let calculate = eval(expression);
     calcPartial = '';
     before = '';
-    expression = calculate;
+    expression = calculate ?? 'Error';
+    result.innerHTML = expression;
+    partial.innerHTML = '';
 }
 
 function showFatorial() {
@@ -317,6 +431,7 @@ function showFatorial() {
     response = Number(numTemp);
     response = factor(response);
     numTemp = response;
+    result.innerHTML += '!';
 }
 
 function factor(value) {
