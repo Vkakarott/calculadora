@@ -5,47 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
-    <title>Cauculadora</title>
+    <title>Calculadora</title>
 </head>
 <body>
-    <h1>Cauculadora</h1>
-    <section>
-        <div id="display">
-            <div id="parse"></div>
-            <div id="res"></div>
-        </div>
-        <table id="teclado">
-            <tr>
-                <td><button value="dell" class="operadores">C</button></td>
-                <td><button value="close" class="operadores"><i class="bi bi-backspace"></i></button></td>
-                <td><button value="**" class="operadores">e²</button></td>
-                <td><button value="/" class="operadores">/</button></td>
-            </tr>
-            <tr>
-                <td><button value="7" class="num">7</button></td>
-                <td><button value="8" class="num">8</button></td>
-                <td><button value="9" class="num">9</button></td>
-                <td><button value="*" class="operadores">X</button></td>
-            </tr>
-            <tr>
-                <td><button value="4" class="num">4</button></td>
-                <td><button value="5" class="num">5</button></td>
-                <td><button value="6" class="num">6</button></td>
-                <td><button value="-" class="operadores">-</button></td>
-            </tr>
-            <tr>
-                <td><button value="1" class="num">1</button></td>
-                <td><button value="2" class="num">2</button></td>
-                <td><button value="3" class="num">3</button></td>
-                <td><button value="+" class="operadores">+</button></td>
-            </tr>
-            <tr>
-                <td><button value="0" class="num">0</button></td>
-                <td><button value="." class="num">,</button></td>
-                <td><button value="=" class="operadores" id="igual">=</button></td>
-            </tr>
-        </table>
-    </section>
-    <script src="script.js"></script>
+    <main>
+        <section class="body">
+            <section class="display">
+                <div class="partial"></div>
+                <div class="result">0</div>
+            </section>
+
+            <section class="keyboard">
+                <button value="second" id="second" class="plus-operator">2nd</button>
+                <button value="deg" id="deg" class="plus-operator">deg</button>
+                <button value="sin" class="plus-operator">sin<span class="sec">-1</span></button>
+                <button value="cos" class="plus-operator">cos<span class="sec">-1</span></button>
+                <button value="tan" class="plus-operator">tan<span class="sec">-1</span></button>
+                <button value="**" class="plus-operator"><span class="bs">X</span><span class="el">y</span></button>
+                <button value="log" class="plus-operator">lg</button>
+                <button value="ln" class="plus-operator">ln</button>
+                <button value="(" class="plus-operator">&#40</button>
+                <button value=")" class="plus-operator">&#41</button>
+                <button value="sqrt" class="plus-operator">√×</button>
+                <button value="dell" class="operating">C</button>
+                <button value="close" class="operating"><i class="bi bi-backspace"></i></button>
+                <button value="porcent" class="operating">%</button>
+                <button value="/" class="operating">÷</button>
+                <button value="fatorial" class="plus-operator">x!</button>
+                <button value="7" class="num">7</button>
+                <button value="8" class="num">8</button>
+                <button value="9" class="num">9</button>
+                <button value="*" class="operating">&#215</button>
+                <button value="**(-1)" class="plus-operator">
+                    <span class="one">1</span>
+                    <span class="barra">/</span>
+                    <span class="x">x</span>
+                </button>
+                <button value="4" class="num">4</button>
+                <button value="5" class="num">5</button>
+                <button value="6" class="num">6</button>
+                <button value="-" class="operating">-</button>
+                <button value="pi" class="plus-operator">π</button>
+                <button value="1" class="num">1</button>
+                <button value="2" class="num">2</button>
+                <button value="3" class="num">3</button>
+                <button value="+" class="operating">+</button>
+                <button value="invert" class="operating"><i class="bi bi-back"></i></i></button>
+                <button value="e" id="exponencial" class="plus-operator">e</button>
+                <button value="0" class="num">0</button>
+                <button value="." class="num">,</button>
+                <button id="equal" value="equal" class="operating">=</button>
+            </section>
+        </section>
+
+        <section class="dark-light">
+            <button value="mode" class="dark-mode">Mode</button>
+        </section>
+    </main>
+            
+    <script src="main.js"></script>
 </body>
 </html>

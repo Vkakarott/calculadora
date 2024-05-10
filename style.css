@@ -1,83 +1,195 @@
+:root {
+    --color-ground: #202020;
+    --color-body: #111111;
+    --color-itens: white;
+    --color-hovers: #101010;
+    --color-shadow: rgba(163, 163, 163, 0.051);
+    --button-color: #ff9f1c;
+    --button-light-color: rgba(128, 128, 128, 0.644);
+}
+
+.light:root {
+    --color-ground: #f0f0f0;
+    --color-body: #ffffff;
+    --color-itens: black;
+    --color-hovers: #d0d0d0;
+    --color-shadow: rgba(228, 228, 228, 0.550);
+    --button-color: #7b3aff;
+    --button-light-color: rgba(163, 163, 163, 0.575);
+}
+
 * {
     padding: 0;
     margin: 0;
+    font-size: 16px;
 }
+
+body, html {
+    width: 100%;
+    height: 100%;
+    min-width: 400px;
+    overflow: hidden;
+}
+
 body {
-    background-color: black;
+    background-color: var(--color-ground);
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center; 
+    color: var(--color-itens);
 }
-h1 {
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-section {
-    background-color: rgb(10, 10, 10);
-    width: 400px;
-    border-radius: 20px;
+
+main {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    gap: 15px;
     align-items: center;
-    padding: 1.5rem;
-    gap: 1rem;
+    justify-content: center;
 }
-#display {
+
+.body {
+    background-color: var(--color-body);
     display: flex;
-    width: 350px;
-    height: 150px;
     flex-direction: column;
-    background-color: rgb(22, 22, 22);
-    color: rgb(255, 255, 255);
-    font-size: 40px;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    border-radius: 17px;
+    box-shadow: 5px 5px 10px var(--color-shadow);
+    padding: 10px 15px 30px 15px;
+    gap: 10px;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 25px);
+    height: 120px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    box-shadow: inset -5px -5px 10px var(--color-shadow);
     align-items: flex-end;
     justify-content: flex-end;
 }
-#res {
-    height: 50px;
-    width: 350px;
-    padding: 2px;
-    display: flex;
-    flex-direction: column;
-    font-size: 50px;
-    align-items: flex-end;
+
+.result {
+    font-size: 3em;
 }
-#parse {
-    padding: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    font-size: 35px;
-    color: rgb(150, 150, 150);
+
+.partial {
+    font-size: 1.7em;
+    color: var(--button-light-color);
 }
-#teclado {
+
+.keyboard {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
-    width: 350px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 5px;
 }
-td {
-    max-width: 85px;
-}
+
 button {
     border: none;
-    width: 85px;
-    height: 85px;
-    font-size: x-large;
-    background-color: rgb(22, 22, 22);
-    color: white;
-    transition: .2s;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 1.1em;
+    box-shadow:  5px 5px 10px var(--color-shadow);
+    background-color: var(--color-light);
+    color: var(--color-itens);
+    transition: .5s;
 }
+
 button:hover {
-    background-color: rgb(8, 8, 8);
+    background-color: var(--color-hovers);
 }
-.operadores {
-    color: orangered;
+
+.operating {
+    color: var(--button-color);
+    font-size: 1.5em;
 }
-#igual {
-    width: 172px;
-    font-size: 35px;
+
+.plus-operator {
+    color: var(--button-light-color);
+}
+
+#exponencial {
+    color: var(--color-itens);
+}
+
+.plus-operator {
+    display: none;
+}
+
+.cientific {
+    max-width: 355px;
+}
+
+.cientific > .keyboard > button {
+    width: 65px;
+    height: 65px;
+}
+
+.cientific > .keyboard > .plus-operator {
+    display: block;
+}
+
+.details {
+    display: flex;
+    width: 95%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+}
+
+#equall {
+    background-color: var(--button-color);
+    color: var(--color-itens);
+}
+
+.dark-mode {
+    height: 40px;
+    border-radius: 5px;
+    color: var(--button-light-color);
+}
+
+.bs {
+    display: flex;
+    transform: translate(26px, 11px);
+}
+.el {
+    display: flex;
+    font-size: 0.7em;
+    transform: translate(37px, -14px);
+}
+
+.one {
+    display: flex;
+    font-size: 0.8em;
+    transform: translate(20px, 15px);
+}
+
+.barra {
+    display: flex;
+    font-size: 1.7em;
+    transform: translate(25px, 10px) rotate(20deg);
+}
+
+.x {
+    display: flex;
+    font-size: 0.8em;
+    transform: translate(35px, -19px);
+}
+
+.sec {
+    display: none;
+    font-size: 0.7em;
+    transform: translate(0px, -7px);
 }
