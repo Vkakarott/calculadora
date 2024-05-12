@@ -393,6 +393,9 @@ function eraser() {
         amount = '';
     } 
     else if (expression) expression = expression.slice(0, -1);
+    
+    if (result.innerHTML.length < 2) result.innerHTML = '0';
+    else result.innerHTML = result.innerHTML.slice(0, -1);
 }
 
 function porcent () {
